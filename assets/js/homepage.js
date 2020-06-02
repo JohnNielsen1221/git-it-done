@@ -3,6 +3,7 @@ var nameInputEl = document.querySelector('#username');
 var repoContainerEl = document.querySelector('#repos-container');
 var repoSearchTerm = document.querySelector('#repo-search-term');
 
+//form to enter GitHub username
 var formSubmitHandler = function(event) {
     event.preventDefault();
     //get value from input element
@@ -16,6 +17,7 @@ var formSubmitHandler = function(event) {
     }
 };
 
+//gets user repos from GitHub API
 var getUserRepos = function(user) {
     // format the github api url
     var apiUrl = 'https://api.github.com/users/' + user + '/repos';
@@ -37,6 +39,7 @@ var getUserRepos = function(user) {
     });
 };   
 
+//displays repos after pulling from GitHub
 var displayRepos = function(repos,searchTerm) {
     //check if api returned any repoos
     if (repos.length === 0) {
@@ -46,7 +49,7 @@ var displayRepos = function(repos,searchTerm) {
     //clear old content
     repoContainerEl.textContent = '';
     repoSearchTerm.textContent = searchTerm;
-    //loopp over repos
+    //loop over repos
     for (var i = 0; i < repos.length; i++) {
         //format repo name
         var repoName = repos[i].owner.login + '/' + repos[i].name;
